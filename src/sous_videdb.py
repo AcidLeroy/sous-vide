@@ -1,10 +1,9 @@
 import psycopg2
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT, ISOLATION_LEVEL_DEFAULT
 import datetime
 
 class SousVideDB:
     def __init__(self):
-        self.DSN = "dbname=postgres  host=localhost user=postgres"
+        self.DSN = "password=raspberry dbname=sousvidedb  host=localhost user=pi"
 
     @property
     def set_point(self):
@@ -55,4 +54,21 @@ class SousVideDB:
         with psycopg2.connect(self.DSN) as conn:
             with conn.cursor() as cur:
                 cur.execute('select * from get_latest_modes(1);')
+                return cur.fetchone()
+
+    @property
+    def relay_on(self):
+        pass
+
+    @relay_on.setter
+    def relay_on(self,value: bool):
+        with psycopg2.connect(self.DSN) as conn:
+            with conn.cursor() as cur:
+                cur.execute('select * from set_relay_on(%s)', (value,))
+
+    @relay_on.getter
+    def relay_on(self):
+        with psycopg2.connect(self.DSN) as conn:
+            with conn.cursor() as cur:
+                cur.execute('select * from get_latest_relay_on(1);')
                 return cur.fetchone()

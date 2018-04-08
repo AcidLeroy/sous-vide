@@ -4,6 +4,12 @@ CREATE TABLE temperature_table (
 	temperature real 
 );  
 
+CREATE TABLE relay_table (
+	id serial PRIMARY KEY, 
+	timestamp timestamp, 
+	relay_on BOOLEAN 
+);  
+
 CREATE TABLE setpoint_table (
 	id serial PRIMARY KEY, 
 	timestamp timestamp, 
@@ -16,6 +22,25 @@ CREATE TABLE sous_vide_mode_table (
 	mode varchar(16) 
 ); 
 
+-- Set the desired state of the relay
+CREATE OR REPLACE FUNCTION set_relay_on(BOOLEAN)
+RETURNS void AS $$ 
+INSERT INTO relay_table
+(timestamp, relay_on) values (CURRENT_TIMESTAMP, $1) 
+$$ 
+LANGUAGE SQL;
+
+-- Get the latest state of the relay
+CREATE OR REPLACE FUNCTION get_latest_relay_on(int) RETURNS TABLE(ts timestamp, relay_on BOOLEAN) 
+AS $$
+	SELECT timestamp, relay_on 
+	FROM relay_table 
+	ORDER BY timestamp DESC 
+	LIMIT $1
+$$
+LANGUAGE SQL;
+
+-- Set the mode of the sous vide ('manual' or 'auto') 
 CREATE OR REPLACE FUNCTION set_mode(varchar(16))
 RETURNS void AS $$ 
 INSERT INTO sous_vide_mode_table
