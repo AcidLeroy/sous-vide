@@ -81,18 +81,19 @@ def main():
   # Initialize the data base
   db = SousVideDB()
   r = {False: "Off", True: "On"}  
-  while True:
-    current_temp = db.current_temperature[1]
-    set_point = db.set_point[1]
-    relay_status = db.relay_on[1]
+  with SousVideDB() as db: 
+      while True:
+        current_temp = db.current_temperature[1]
+        set_point = db.set_point[1]
+        relay_status = db.relay_on[1]
 
-    # Send some centred test
-    lcd_string("Sous Vide",LCD_LINE_1,2)
-    lcd_string("Temp (F): {0:.2f}".format(current_temp),LCD_LINE_2,2)
-    lcd_string("Set Point (F): {}".format(set_point),LCD_LINE_3,2)
-    lcd_string("Relay: {}".format(r[relay_status]),LCD_LINE_4,2)
- 
-    time.sleep(0.5) 
+        # Send some centred test
+        lcd_string("Sous Vide",LCD_LINE_1,2)
+        lcd_string("Temp (F): {0:.2f}".format(current_temp),LCD_LINE_2,2)
+        lcd_string("Set Point (F): {}".format(set_point),LCD_LINE_3,2)
+        lcd_string("Relay: {}".format(r[relay_status]),LCD_LINE_4,2)
+     
+        time.sleep(0.1) 
 
 def lcd_init():
   # Initialise display

@@ -9,14 +9,13 @@ increment = 5
 low_set = 50
 high_set = 200
 
-def main(): 
+def main(db): 
     GPIO.setmode(GPIO.BCM)
     # Define your pins
     CLOCKPIN = 22
     DATAPIN = 5
     SWITCHPIN = 6
 
-    db = SousVideDB()
     
     # Callback for rotary change
     def rotaryChange(direction):
@@ -48,4 +47,5 @@ def main():
         GPIO.cleanup()
 
 if __name__ == '__main__': 
-    main()
+    with SousVideDB() as db: 
+        main(db)

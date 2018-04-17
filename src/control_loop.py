@@ -33,8 +33,8 @@ def control_loop(db):
 
 
 def main():
-    db = SousVideDB()
-    control_loop(db)
+    with SousVideDB() as db: 
+        control_loop(db)
 
 
 if __name__ == '__main__':

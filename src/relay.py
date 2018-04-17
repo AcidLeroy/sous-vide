@@ -5,11 +5,12 @@ import time
 class Relay(object): 
     state = {True: GPIO.HIGH, False: GPIO.LOW} 
     def __init__(self, db, pin=26): 
+        print('Using pin {} for relay'.format(pin))
         self.pin = pin 
         self.db = db
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(pin, GPIO.OUT)
-    def read_and_update(self): 
+    def update(self): 
         """
         Read what the desired state is set to in the db and then write it to the device
         """
@@ -19,11 +20,11 @@ class Relay(object):
 
 
 def main(): 
-    db = SousVideDB()
-    r = Relay(pin=26, db=db)
-    while True: 
-        r.read_and_update()
-        time.sleep(.1)
+    with SousVideDB() as db:
+        r = Relay(pin=26, db=db)
+        while True: 
+            r.update()
+            time.sleep(.1)
 
 
 if __name__ == '__main__': 
