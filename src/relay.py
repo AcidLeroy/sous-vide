@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 from sous_videdb import SousVideDB
 import time
+import json
 
 class Relay(object): 
     state = {True: GPIO.HIGH, False: GPIO.LOW} 
@@ -20,8 +21,10 @@ class Relay(object):
 
 
 def main(): 
+    config = json.load(open('config.json'))
     with SousVideDB() as db:
-        r = Relay(pin=26, db=db)
+        pin = config['Relay']['CTRL'] 
+        r = Relay(pin=pin, db=db)
         while True: 
             r.update()
             time.sleep(.1)

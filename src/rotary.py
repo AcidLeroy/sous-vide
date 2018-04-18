@@ -2,6 +2,7 @@ from ky040 import KY040
 import RPi.GPIO as GPIO
 from time import sleep
 from sous_videdb import SousVideDB
+import json
 
 # How many degrees to vary the temp
 increment = 5
@@ -11,10 +12,11 @@ high_set = 200
 
 def main(db): 
     GPIO.setmode(GPIO.BCM)
+    config = json.load(open('config.json')) 
     # Define your pins
-    CLOCKPIN = 22
-    DATAPIN = 5
-    SWITCHPIN = 6
+    CLOCKPIN = config['Rotary']['CLOCKPIN']
+    DATAPIN = config['Rotary']['DATAPIN']
+    SWITCHPIN = config['Rotary']['SWITCHPIN']
 
     
     # Callback for rotary change

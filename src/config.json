@@ -1,0 +1,20 @@
+{
+	"Relay": {
+		"CTRL": 26
+	} , 
+	"Rotary": {
+		"CLOCKPIN": 22, 
+		"DATAPIN": 5, 
+		"SWITCHPIN": 6
+		} , 
+	"LCD": {
+		"LCD_RS":18, 
+		"LCD_E": 23, 
+		"LCD_D4": 25, 	
+		"LCD_D5": 12, 	
+		"LCD_D6": 16, 	
+		"LCD_D7": 20, 	
+		"LED_ON": 15 	
+	} 	
+	
+} 

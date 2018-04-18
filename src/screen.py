@@ -30,6 +30,7 @@
 #import
 import RPi.GPIO as GPIO
 import time
+import json
 from sous_videdb import SousVideDB
  
 # Define GPIO to LCD mapping
@@ -57,6 +58,23 @@ E_DELAY = 0.0005
  
 def main():
   # Main program block
+  config = json.load(open('config.json'))
+  global LCD_RS
+  LCD_RS = config['LCD']['LCD_RS']
+  global LCD_E
+  LCD_E = config['LCD']['LCD_E']
+  global LCD_D4
+  LCD_D4 = config['LCD']['LCD_D4']
+  global LCD_D5
+  LCD_D5 = config['LCD']['LCD_D5']
+  global LCD_D6
+  LCD_D6 = config['LCD']['LCD_D6']
+  global LCD_D7
+  LCD_D7 = config['LCD']['LCD_D7']
+  global LED_ON
+  LED_ON = config['LCD']['LED_ON']
+  
+
  
   GPIO.setmode(GPIO.BCM)       # Use BCM GPIO numbers
   GPIO.setup(LCD_E, GPIO.OUT)  # E
