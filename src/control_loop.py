@@ -1,3 +1,5 @@
+#!/usr/bin/env python3 
+
 from sous_videdb import SousVideDB
 import time
 

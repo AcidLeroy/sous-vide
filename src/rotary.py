@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from ky040 import KY040
 import RPi.GPIO as GPIO
 from time import sleep

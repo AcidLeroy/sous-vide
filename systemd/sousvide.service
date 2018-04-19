@@ -1,0 +1,14 @@
+[Unit]
+Description=Sous Vide Service
+After=network.target
+
+[Service]
+ExecStart=/bin/bash run_all.sh
+WorkingDirectory=/home/pi/repos/sous-vide/src
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
