@@ -1,6 +1,6 @@
 [Unit]
 Description=Sous Vide Service
-After=network.target
+After=network.target postgresql.service
 
 [Service]
 ExecStart=/bin/bash run_all.sh
