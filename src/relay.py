@@ -7,12 +7,16 @@ import json
 
 class Relay(object): 
     state = {True: GPIO.HIGH, False: GPIO.LOW} 
+
     def __init__(self, db, pin=26): 
         print('Using pin {} for relay'.format(pin))
         self.pin = pin 
         self.db = db
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(pin, GPIO.OUT)
+        # Initially set the relay to be off
+        self.db.relay_on = False
+
     def update(self): 
         """
         Read what the desired state is set to in the db and then write it to the device
