@@ -33,7 +33,7 @@ def main():
         r = Relay(pin=pin, db=db)
         while True: 
             r.update()
-            time.sleep(.1)
+            time.sleep(1.0)
 
 
 if __name__ == '__main__': 

@@ -41,7 +41,7 @@ def main():
         t = Temperature(db=db)
         while True: 
             t.update()
-            time.sleep(.1)
+            time.sleep(1)
 
 
 if __name__ == '__main__': 
